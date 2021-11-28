@@ -9,12 +9,14 @@ function Chat({ username, roomname, socket }) {
   const [messages, setMessages] = useState([]);
 
   const dispatch = useDispatch();
-  
+
   const dispatchProcess = (encrypt, msg, cipher) => {
     dispatch(process(encrypt, msg, cipher));
   };
 
   useEffect(() => {
+    const chatInput = document.getElementById("chat-input");
+    chatInput.focus()
     socket.on("message", (data) => {
       //decypt the message
       const answer = to_Decrypt(data.text, data.username);
@@ -78,6 +80,8 @@ function Chat({ username, roomname, socket }) {
       </div>
       <div className="send">
         <input
+          autofocus
+          id="chat-input"
           placeholder="enter your message"
           value={text}
           onChange={(e) => setText(e.target.value)}

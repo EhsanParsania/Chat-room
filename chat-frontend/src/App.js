@@ -1,5 +1,5 @@
 import Chat from "./chat/chat";
-import Process from "./process/process";
+// import Process from "./process/process";
 import Home from "./home/home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";

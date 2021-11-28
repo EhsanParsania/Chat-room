@@ -20,6 +20,7 @@ function Homepage({ socket }) {
     <div className="homepage">
       {/* <h1>Welcome to ChatApp</h1> */}
       <input
+        autoFocus
         placeholder="Input your user name"
         value={username}
         onChange={(e) => setusername(e.target.value)}
