@@ -17,24 +17,25 @@ function Chat({ username, roomname, socket }) {
   useEffect(() => {
     socket.on("message", (data) => {
       //decypt the message
-      const ans = to_Decrypt(data.text, data.username);
-      dispatchProcess(false, ans, data.text);
-      console.log(ans);
+      const answer = to_Decrypt(data.text, data.username);
+      dispatchProcess(false, answer, data.text);
+      console.log(answer);
       let temp = messages;
       temp.push({
         userId: data.userId,
         username: data.username,
-        text: ans,
+        text: answer,
       });
       setMessages([...temp]);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   const sendData = () => {
     if (text !== "") {
       //encrypt the message here
-      const ans = to_Encrypt(text);
-      socket.emit("chat", ans);
+      const answer = to_Encrypt(text);
+      socket.emit("chat", answer);
       setText("");
     }
   };
@@ -46,7 +47,7 @@ function Chat({ username, roomname, socket }) {
 
   useEffect(scrollToBottom, [messages]);
 
-  console.log(messages, "mess");
+  console.log(messages, "message");
 
   return (
     <div className="chat">

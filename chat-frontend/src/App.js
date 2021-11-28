@@ -10,7 +10,7 @@ const socket = io.connect('/');
 
 function Appmain(props) {
   return (
-    <React.Fragment>
+    <div className='container'>
       <div className="right">
         <Chat
           username={props.match.params.username}
@@ -18,10 +18,10 @@ function Appmain(props) {
           socket={socket}
         />
       </div>
-      <div className="left">
+      {/* <div className="left">
         <Process />
-      </div>
-    </React.Fragment>
+      </div> */}
+    </ div>
   );
 }
 
