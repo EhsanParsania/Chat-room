@@ -1,6 +1,6 @@
 import "./chat.scss";
 import { to_Decrypt, to_Encrypt } from "../aes.js";
-import { process } from "../store/action/index";
+import * as Action from "../store/action/index";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 //gets the data from the action object and reducers defined earlier
@@ -11,7 +11,7 @@ function Chat({ username, roomname, socket }) {
   const dispatch = useDispatch();
 
   const dispatchProcess = (encrypt, msg, cipher) => {
-    dispatch(process(encrypt, msg, cipher));
+    dispatch(Action.process(encrypt, msg, cipher));
   };
 
   useEffect(() => {
