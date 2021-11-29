@@ -5,6 +5,7 @@ const socket = require("socket.io");
 const cors = require("cors");
 const { get_Current_User, user_Disconnect, join_User } = require("./user");
 
+// for two side connection
 app.use(express());
 
 const port = 8000;
@@ -26,33 +27,33 @@ io.on("connection", (socket) => {
   //for a new user joining the room
   socket.on("joinRoom", ({ username, roomname }) => {
     //* create user
-    const p_user = join_User(socket.id, username, roomname);
-    console.log(socket.id, "=id");
-    socket.join(p_user.room);
+    const newUser = join_User(socket.id, username, roomname);
+    console.log(socket.id, " : new user ID");
+    socket.join(newUser.room);
 
     //display a welcome message to the user who have joined a room
     socket.emit("message", {
-      userId: p_user.id,
-      username: p_user.username,
-      text: `Welcome ${p_user.username}`,
+      userId: newUser.id,
+      username: newUser.username,
+      text: `Welcome ${newUser.username}`,
     });
 
     //displays a joined room message to all other room users except that particular user
-    socket.broadcast.to(p_user.room).emit("message", {
-      userId: p_user.id,
-      username: p_user.username,
-      text: `${p_user.username} has joined the chat`,
+    socket.broadcast.to(newUser.room).emit("message", {
+      userId: newUser.id,
+      username: newUser.username,
+      text: `${newUser.username} has joined the chat`,
     });
   });
 
   //user sending message
   socket.on("chat", (text) => {
     //gets the room user and the message sent
-    const p_user = get_Current_User(socket.id);
+    const newUser = get_Current_User(socket.id);
 
-    io.to(p_user?.room).emit("message", {
-      userId: p_user.id,
-      username: p_user.username,
+    io.to(newUser?.room).emit("message", {
+      userId: newUser?.id,
+      username: newUser?.username,
       text: text,
     });
   });
@@ -60,13 +61,13 @@ io.on("connection", (socket) => {
   //when the user exits the room
   socket.on("disconnect", () => {
     //the user is deleted from array of users and a left room message displayed
-    const p_user = user_Disconnect(socket.id);
+    const newUser = user_Disconnect(socket.id);
 
-    if (p_user) {
-      io.to(p_user.room).emit("message", {
-        userId: p_user.id,
-        username: p_user.username,
-        text: `${p_user.username} has left the room`,
+    if (newUser) {
+      io.to(newUser.room).emit("message", {
+        userId: newUser.id,
+        username: newUser.username,
+        text: `${newUser.username} has left the room`,
       });
     }
   });
