@@ -1,4 +1,4 @@
-const init = { id: 'AWRo1wrsoIY4dTCVAAAB', username: 'a', room: 'b' }
+const init = { id: 'AWRo1wrsoIY4dTCVAAAB', username: 'parsaaa', room: 'room 5' }
 const users = [init];
 
 // joins the user to the specific chatroom

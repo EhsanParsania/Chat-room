@@ -10,18 +10,22 @@ const socket = io.connect('/');
 
 function Appmain(props) {
   return (
-    <React.Fragment>
-      <div className="right">
-        <Chat
-          username={props.match.params.username}
-          roomname={props.match.params.roomname}
-          socket={socket}
-        />
-      </div>
-      <div className="left">
+    // <div className='container'>
+
+      <>
+        <div className="right">
+          <Chat
+            username={props.match.params.username}
+            roomname={props.match.params.roomname}
+            socket={socket}
+          />
+        </div>
+        <div className="left">
         <Process />
       </div>
-    </React.Fragment>
+      </>
+
+    //  {/* </ div> */}
   );
 }
 

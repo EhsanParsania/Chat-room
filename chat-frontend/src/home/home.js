@@ -18,8 +18,9 @@ function Homepage({ socket }) {
 
   return (
     <div className="homepage">
-      <h1>Welcome to ChatApp</h1>
+      {/* <h1>Welcome to ChatApp</h1> */}
       <input
+        autoFocus
         placeholder="Input your user name"
         value={username}
         onChange={(e) => setusername(e.target.value)}
@@ -29,8 +30,8 @@ function Homepage({ socket }) {
         value={roomname}
         onChange={(e) => setroomname(e.target.value)}
       ></input>
-      <Link to={`/chat/${roomname}/${username}`}>
-        <button onClick={sendData}>Join</button>
+      <Link to={`/chat/${roomname}/${username}`} onClick={sendData} onKeyPress={sendData} >
+        <button  >Join</button>
       </Link>
     </div>
   );
