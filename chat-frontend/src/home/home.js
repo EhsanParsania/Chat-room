@@ -30,8 +30,8 @@ function Homepage({ socket }) {
         value={roomname}
         onChange={(e) => setroomname(e.target.value)}
       ></input>
-      <Link to={`/chat/${roomname}/${username}`}>
-        <button onClick={sendData}>Join</button>
+      <Link to={`/chat/${roomname}/${username}`} onClick={sendData} onKeyPress={sendData} >
+        <button  >Join</button>
       </Link>
     </div>
   );
